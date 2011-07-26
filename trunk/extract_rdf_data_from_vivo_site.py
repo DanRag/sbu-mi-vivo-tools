@@ -39,5 +39,5 @@ if __name__ == "__main__":
         print("""Usage:
 python extract_rdf_data_from_vivo_site.py 'http://reach.suny.edu' username password
 
-Logins into a VIVO site and downloads ABOX and TBOX and outputs to standard output.
+Logs into a remote VIVO 1.2 site and downloads ABOX and TBOX RDF serialized as ntriples standard output.
 """)
