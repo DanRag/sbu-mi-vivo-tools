@@ -1,3 +1,0 @@
-{"sparql_endpoint": "http://link.informatics.stonybrook.edu/sparql/",
-    "vivo-sites" : [{"username": "defaultAdmin", "password": "test", "site": "http://reach.suny.edu", "name": "reach"}],
-    "engine_type": "stardog"}
