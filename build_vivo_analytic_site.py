@@ -17,10 +17,11 @@ import glob
 
 
 import extract_rdf_data_from_vivo_site
+import pmid_to_cuis
 import umls_alignment
 import FreeTextTriples
 
-def main(configuration_json,step_to_start_at = 2):
+def main(configuration_json,step_to_start_at = 3):
 
     f=open(configuration_json,"r")
     configuration = json.load(f)
@@ -55,6 +56,16 @@ def main(configuration_json,step_to_start_at = 2):
 
         vivo_site["free_text_indices"] = free_text_indices
         i += 1
+
+
+        if step_to_start_at <= 3:
+            print("Getting CUIS for articles")
+            pmid_to_cuis.main(abox_file_name, abox_file_name + "." + "pmid2cuis.nt")
+        else:
+            pass
+
+        vivo_site["pmid2cuis"] = abox_file_name + "." + "pmid2cuis.nt"
+
 
     pprint.pprint(configuration)
 
