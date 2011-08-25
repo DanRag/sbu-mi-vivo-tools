@@ -21,7 +21,7 @@ import pmid_to_cuis
 import umls_alignment
 import FreeTextTriples
 
-def main(configuration_json,step_to_start_at = 3):
+def main(configuration_json,step_to_start_at = 0):
 
     f=open(configuration_json,"r")
     configuration = json.load(f)

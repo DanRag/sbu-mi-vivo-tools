@@ -75,7 +75,7 @@ def main(ntriples_file_name,alignment_ntriples_file_name,class_uri = "http://viv
                                 umls_cuis[umls_cui] = [n_cui + 1,temp_list[1]]
                             else:
                                 umls_cuis[umls_cui] = (1,umls_label)
-                                ntriples_results += '<%s> <%s> "%s"\n' % (umls_cui_uri,"http://www.w3.org/2000/01/rdf-schema#label",umls_label)
+                                ntriples_results += '<%s> <%s> "%s" .\n' % (umls_cui_uri,"http://www.w3.org/2000/01/rdf-schema#label",umls_label)
                                 
                 print(ntriples_results)
                 results_ts.load_ntriples(ntriples_results.split("\n"))
@@ -86,6 +86,7 @@ def main(ntriples_file_name,alignment_ntriples_file_name,class_uri = "http://viv
     fw.close()
     
     pprint.pprint(umls_cuis)
+    print(len(umls_cuis.keys()))
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:

@@ -7,8 +7,6 @@ import pyTripleSimple
 import urllib2
 import httplib
 import json
-import re
-from xml.sax.saxutils import unescape
 import pprint
 
 def pubmed_to_cuis(pmid):
@@ -16,7 +14,7 @@ def pubmed_to_cuis(pmid):
     base_server = "link.informatics.stonybrook.edu" 
     base_app = "/weaver/"
     service_fragment = "pubmed2cuis?pmid=%s" % urllib2.quote(str(pmid))
-    conn = httplib.HTTPConnection(base_server)
+    conn = httplib.HTTPConnection(base_server,timeout=180)
     conn.request("GET",base_app + service_fragment)
     
     resp = conn.getresponse()
