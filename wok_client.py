@@ -46,7 +46,7 @@ class WebOfKnowledgeService(object):
         return result
 
 
-if __name___== "__main__" :
+if __name__ == "__main__" :
     if len(sys.argv) == 1:
         pass
     else:
