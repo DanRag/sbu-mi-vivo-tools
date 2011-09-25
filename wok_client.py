@@ -10,6 +10,8 @@
 import suds
 import logging
 import pprint
+import sys
+
 logging.basicConfig(level=logging.INFO)
 
 class WebOfKnowledgeService(object):
@@ -44,8 +46,12 @@ class WebOfKnowledgeService(object):
         return result
 
 
-woks = WebOfKnowledgeService()
-woks.open()
-r = woks.search("TI=(The impact of conservation on the status of the world's vertebrates)")
-pprint.pprint(r)
-woks.close()
+if __name___== "__main__" :
+    if len(sys.argv) == 1:
+        pass
+    else:
+        woks = WebOfKnowledgeService()
+        woks.open()
+        r = woks.search(sys.argv[1])
+        pprint.pprint(r)
+        woks.close()
