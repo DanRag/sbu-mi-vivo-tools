@@ -1,5 +1,20 @@
 #! /usr/bin/python
 
+"""
+
+This currently annotates version 1.3 VIVO subjectAreas. The 1.4 release directly integrates external
+vocabulary into the source and allows direct annotation of foaf:person etc.
+
+See: http://issues.library.cornell.edu/browse/VIVOONT-372?focusedCommentId=51740&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel
+
+Until the 1.4 release annotations are made using a custom predicate:
+
+http://link.informatics.stonybrook.edu/MeaningLookup/mappedResearchConcept
+
+"""
+
+
+
 import time
 import sys
 import os
