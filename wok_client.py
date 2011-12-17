@@ -58,6 +58,10 @@ class WokResults(object):
             pprint.pprint(search_result)
             try:
                 authors = search_result.authors
+                author_list = authors[0].values
+                for author in author_list:
+                    print(author)
+
             except AttributeError:
                 authors = None
 
