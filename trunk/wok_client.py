@@ -23,7 +23,6 @@ class WebOfKnowledgeService(object):
         """Authenticate against the WOK auth server"""
         self.auth_client = suds.client.Client(self.wok_auth_uri)
         self.auth_result = self.auth_client.service.authenticate()
-
         self.wok_client = suds.client.Client(self.wok_uri)
         self.wok_client.set_options(headers = {"Cookie" : '[SID="%s"]' % self.auth_result})
         self.auth_client.set_options(headers = {"Cookie" : '[SID="%s"]' % self.auth_result})
@@ -46,15 +45,16 @@ class WebOfKnowledgeService(object):
         retrieveParameters.firstRecord = first_record
 
         result = self.wok_client.service.search(queryParameters,retrieveParameters)
-        return result
+        return WokResults(result)
 
-class WokResultToNtriple(object):
+class WokResults(object):
     def __init__(self, search_results, prefix="http://link.informatics.stonybrook.edu/pub/"):
-        self.search_results
+        self.search_results = search_results
+        self.prefix = prefix
     
-    def wok_result_to_ntriples(self):
+    def to_ntriples(self):
 
-        for search_result in search_results.records:
+        for search_result in self.search_results.records:
             pprint.pprint(search_result)
             try:
                 authors = search_result.authors
@@ -63,7 +63,7 @@ class WokResultToNtriple(object):
 
             try:
                 keywords = search_result.keywords
-            except AttributeError:
+            except AttributeError:          
                 keywords = None
 
             try:
@@ -129,6 +129,6 @@ if __name__ == "__main__" :
         woks = WebOfKnowledgeService()
         woks.open()
         r = woks.search(sys.argv[1])
-        wok_result_to_ntriples(r)
+        r.to_ntriples()
         #pprint.pprint(r)
         woks.close()
