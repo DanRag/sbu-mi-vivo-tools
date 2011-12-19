@@ -51,17 +51,22 @@ class WokResults(object):
     def __init__(self, search_results, prefix="http://link.informatics.stonybrook.edu/pub/"):
         self.search_results = search_results
         self.prefix = prefix
-    
+
     def to_ntriples(self):
-
+        return self._process_xml()
+    
+    def _process_xml(self):
+        results = []
         for search_result in self.search_results.records:
+            result_dict = {}
             pprint.pprint(search_result)
+            result_dict["authors"] = []
+            result_dict["id"] = search_result.UT
+            result_dict["extract_source"] = "ISI Web of Knowledge"
             try:
-                authors = search_result.authors
-                author_list = authors[0].values
-                for author in author_list:
-                    print(author)
-
+                author_list_raw =  self.authors(search_result.authors)
+                for article_author in author_list_raw:
+                    result_dict["authors"].append(self.author(article_author))
             except AttributeError:
                 authors = None
 
@@ -72,6 +77,7 @@ class WokResults(object):
 
             try:
                 title = search_result.title
+                result_dict["title"] = title[0].values[0]
             except AttributeError:
                 title = None
 
@@ -80,18 +86,44 @@ class WokResults(object):
             except AttributeError:
                 source = None
 
-    def authors(self,authors):
-        pass
+            results.append(result_dict)
+            pprint.pprint(results)
+
+    def authors(self,authors_xml):
+        author_list = authors_xml[0].values
+        return author_list
 
     def author(self,author):
-        pass
+        author_dict = {"author_original" : author}
+        author_split = [part.strip() for part in author.split(",")]
+        last_name = author_split[0]
+        if len(author_split) == 2:
+            initials = author_split[1]
+            if len(initials) == 2:
+                first_name_initial = initials[0]
+                middle_name_initial = initials[1]
+            else:
+                first_name_initial = initials[0]
+                middle_name_initial = ""
+        else:
+            initials = ""
+            first_name_initial = ""
+            middle_name_initial = ""
+
+        author_dict["last_name"] = last_name
+        author_dict["first_name_initial"] = first_name_initial
+        author_dict["middle_name_initial"] = middle_name_initial
+        full_name = first_name_initial + middle_name_initial + " " + last_name
+        author_dict["full_name"] = full_name.strip()
+
+        return author_dict
+
 
     def keywords(self,keywords):
         pass
 
     def source(self, source):
         pass
-
 
 a="""
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
