@@ -59,7 +59,7 @@ class WokResults(object):
         results = []
         for search_result in self.search_results.records:
             result_dict = {}
-            pprint.pprint(search_result)
+            #pprint.pprint(search_result)
             result_dict["authors"] = []
             result_dict["id"] = search_result.UT
             result_dict["extract_source"] = "ISI Web of Knowledge"
@@ -82,9 +82,11 @@ class WokResults(object):
                 title = None
 
             try:
-                source = search_result.source
+                source_xml = search_result.source
+                result_dict["source"] = self.source(source_xml)
+                print("hi")
             except AttributeError:
-                source = None
+                raise
 
             results.append(result_dict)
             pprint.pprint(results)
@@ -122,8 +124,14 @@ class WokResults(object):
     def keywords(self,keywords):
         pass
 
-    def source(self, source):
-        pass
+    def source(self, source_xml):
+        source_dict = {}
+        for value_pair in source_xml:
+            if value_pair.label == "Volume":
+                source_dict["Volume"] = value_pair.values[0]
+            if value_pair.label == "SourceTitle":
+                source_dict["title"] = value_pair.values[0]
+        return source_dict
 
 a="""
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
