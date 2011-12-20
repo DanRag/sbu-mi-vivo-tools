@@ -11,6 +11,8 @@ import suds
 import logging
 import pprint
 import sys
+import time
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -59,9 +61,9 @@ class WokResults(object):
         results = []
         for search_result in self.search_results.records:
             result_dict = {}
-            #pprint.pprint(search_result)
             result_dict["authors"] = []
             result_dict["id"] = search_result.UT
+            result_dict["extract_date"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             result_dict["extract_source"] = "ISI Web of Knowledge"
             try:
                 author_list_raw =  self.authors(search_result.authors)
@@ -72,6 +74,7 @@ class WokResults(object):
 
             try:
                 keywords = search_result.keywords
+                result_dict["keywords"] = keywords[0].values
             except AttributeError:          
                 keywords = None
 
@@ -84,7 +87,7 @@ class WokResults(object):
             try:
                 source_xml = search_result.source
                 result_dict["source"] = self.source(source_xml)
-                print("hi")
+
             except AttributeError:
                 raise
 
@@ -120,10 +123,6 @@ class WokResults(object):
 
         return author_dict
 
-
-    def keywords(self,keywords):
-        pass
-
     def source(self, source_xml):
         source_dict = {}
         for value_pair in source_xml:
@@ -131,6 +130,14 @@ class WokResults(object):
                 source_dict["Volume"] = value_pair.values[0]
             if value_pair.label == "SourceTitle":
                 source_dict["title"] = value_pair.values[0]
+            if value_pair.label == "Pages":
+                page_range = value_pair.values[0]
+                source_dict["page_range"] = page_range
+                start_page, end_page = tuple(page_range.split("-"))
+                source_dict["start_page"] = start_page
+                source_dict["end_page"]  = end_page
+            if value_pair.label == "Issue":
+                source_dict["Issue"] = value_pair.values[0]
         return source_dict
 
 a="""
