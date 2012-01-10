@@ -111,7 +111,6 @@ class WokResults(object):
                 first_name_initial = initials[0]
                 middle_name_initial = ""
         else:
-            initials = ""
             first_name_initial = ""
             middle_name_initial = ""
 
@@ -127,7 +126,7 @@ class WokResults(object):
         source_dict = {}
         for value_pair in source_xml:
             if value_pair.label == "Volume":
-                source_dict["Volume"] = value_pair.values[0]
+                source_dict["volume"] = value_pair.values[0]
             if value_pair.label == "SourceTitle":
                 source_dict["title"] = value_pair.values[0]
             if value_pair.label == "Pages":
@@ -137,7 +136,10 @@ class WokResults(object):
                 source_dict["start_page"] = start_page
                 source_dict["end_page"]  = end_page
             if value_pair.label == "Issue":
-                source_dict["Issue"] = value_pair.values[0]
+                source_dict["issue"] = value_pair.values[0]
+            if value_pair.label == "Published.BiblioYear":
+                source_dict["year"] = value_pair.values[0]
+
         return source_dict
 
 a="""
