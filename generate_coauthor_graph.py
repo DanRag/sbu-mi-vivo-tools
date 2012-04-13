@@ -25,10 +25,9 @@ def main(file_name):
                                          ("p2", "in", ["<http://vivoweb.org/ontology/core#linkedInformationResource>"]),
                                          ("t","in", ["<http://vivoweb.org/ontology/core#hasMemberRole>"]),
                                          ("c1","!=","c2")],["a1","a2"],"coauthors")
-    graphml_string = graph_obj.translate_into_graphml_file()
     print("Writing results to a file")
     fo = open(file_name + ".coa.graphml","w")
-    fo.write(graphml_string)
+    graph_obj.translate_into_graphml_file(fo)
     fo.close()
 
 
