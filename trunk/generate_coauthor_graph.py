@@ -11,7 +11,7 @@ from pyTripleSimple import SimpleTripleStore
 from pyTripleSimple import ExtractGraphFromSimpleTripleStore
 import sys
 
-def main(file_name):
+def main(file_name,in_network_restriction=1):
     ts = SimpleTripleStore()
     f = open(file_name)
     print("Loading triples")
@@ -20,13 +20,25 @@ def main(file_name):
     print("Generating coauthor network")
     graph_obj = ExtractGraphFromSimpleTripleStore(ts)
     graph_obj.register_label()
-    graph_obj.add_pattern_for_links([("a1","p1","c1"),("a1","t","f"),("c1","p2","ar1"),("c2","p2","ar1"),("a2","p1","c2"),("a2","t","f")],
-                                     [("p1","in",["<http://vivoweb.org/ontology/core#authorInAuthorship>"]),
-                                         ("p2", "in", ["<http://vivoweb.org/ontology/core#linkedInformationResource>"]),
-                                         ("t","in", ["<http://vivoweb.org/ontology/core#hasMemberRole>"]),
-                                         ("c1","!=","c2")],["a1","a2"],"coauthors")
+
+    base_patterns = [("a1","p1","c1"),("a1","t","f"),("c1","p2","ar1"),("c2","p2","ar1"),("a2","p1","c2")]
+    base_restrictions = [("p1","in",["<http://vivoweb.org/ontology/core#authorInAuthorship>"]),
+        ("p2", "in", ["<http://vivoweb.org/ontology/core#linkedInformationResource>"]),
+        ("c1","!=","c2")]
+
+    if not(in_network_restriction):
+        membership_pattern = ("a2","t","f")
+        membership_restriction = ("t","in", ["<http://vivoweb.org/ontology/core#hasMemberRole>"])
+        base_patterns.append(membership_pattern)
+        base_restrictions.append(membership_restriction)
+
+    graph_obj.add_pattern_for_links(base_pattern,base_restriction,["a1","a2"],"coauthors")
     print("Writing results to a file")
-    fo = open(file_name + ".coa.graphml","w")
+    if in_network_restriction:
+        graphml_file_name = file_name + ".network.coa.graphml"
+    else:
+        graphml_file_name = file_name + ".full.coa.graphml"
+    fo = open(graphml_file_name,"w")
     graph_obj.translate_into_graphml_file(fo)
     fo.close()
 
@@ -34,9 +46,12 @@ def main(file_name):
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("""Usage:
-pypy-c generate_coauthor_graph.py reach_abox_2012-03-09.nt"""
+pypy-c generate_coauthor_graph.py reach_abox_2012-03-09.nt [full]"""
             )
     else:
-        main(sys.argv[1])
+        if len(sys.argv) == 2:
+            main(sys.argv[1])
+        else:
+            main(sys.argv[1],0)
 
 
