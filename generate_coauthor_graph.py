@@ -32,7 +32,7 @@ def main(file_name,in_network_restriction=1):
         base_patterns.append(membership_pattern)
         base_restrictions.append(membership_restriction)
 
-    graph_obj.add_pattern_for_links(base_pattern,base_restriction,["a1","a2"],"coauthors")
+    graph_obj.add_pattern_for_links(base_patterns,base_restrictions,["a1","a2"],"coauthors")
     print("Writing results to a file")
     if in_network_restriction:
         graphml_file_name = file_name + ".network.coa.graphml"
