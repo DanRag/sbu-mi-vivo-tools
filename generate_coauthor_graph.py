@@ -26,7 +26,7 @@ def main(file_name,in_network_restriction=1):
         ("p2", "in", ["<http://vivoweb.org/ontology/core#linkedInformationResource>"]),
         ("c1","!=","c2")]
 
-    if not(in_network_restriction):
+    if in_network_restriction:
         membership_pattern = ("a2","t","f")
         membership_restriction = ("t","in", ["<http://vivoweb.org/ontology/core#hasMemberRole>"])
         base_patterns.append(membership_pattern)
