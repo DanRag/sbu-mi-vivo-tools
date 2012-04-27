@@ -1,0 +1,242 @@
+﻿FN Thomson Reuters Web of Knowledge
+VR 1.0
+PT J
+AU Samwald, Matthias
+   Jentzsch, Anja
+   Bouton, Christopher
+   Kallesoe, Claus Stie
+   Willighagen, Egon
+   Hajagos, Janos
+   Marshall, M Scott
+   Prud'hommeaux, Eric
+   Hassenzadeh, Oktie
+   Pichler, Elgar
+   Stephens, Susie
+TI Linked open drug data for pharmaceutical research and development.
+SO Journal of cheminformatics
+VL 3
+IS 1
+BP 19
+PD 2011 May 16
+PY 2011
+AB There is an abundance of information about drugs available on the Web.
+   Data sources range from medicinal chemistry results, over the impact of
+   drugs on gene expression, to the outcomes of drugs in clinical trials.
+   These data are typically not connected together, which reduces the ease
+   with which insights can be gained. Linking Open Drug Data (LODD) is a
+   task force within the World Wide Web Consortium's (W3C) Health Care and
+   Life Sciences Interest Group (HCLS IG). LODD has surveyed publicly
+   available data about drugs, created Linked Data representations of the
+   data sets, and identified interesting scientific and business questions
+   that can be answered once the data sets are connected. The task force
+   provides recommendations for the best practices of exposing data in a
+   Linked Data representation. In this paper, we present past and ongoing
+   work of LODD and discuss the growing importance of Linked Data as a
+   foundation for pharmaceutical R&D data sharing.
+Z9 4
+SN 1758-2946
+UT MEDLINE:21575203
+ER
+PT J
+AU Kreinovich, Vladik
+   Longpre, Luc
+   Starks, Scott A.
+   Xiang, Gang
+   Beck, Jan
+   Kandathi, Raj
+   Nayak, Asis
+   Ferson, Scott
+   Hajagos, Janos
+TI Interval versions of statistical techniques with applications to
+   environmental analysis, bioinformatics, and privacy in statistical
+   databases
+SO JOURNAL OF COMPUTATIONAL AND APPLIED MATHEMATICS
+VL 199
+IS 2
+SI SI
+BP 418
+EP 423
+DI 10.1016/j.cam.2005.07.041
+PD FEB 15 2007
+PY 2007
+AB In many areas of science and engineering, it is desirable to estimate
+   statistical characteristics (mean, variance, covariance, etc.) under
+   interval uncertainty. For example, we may want to use the measured
+   values x(t) of a pollution level in a lake at different moments of time
+   to estimate the average pollution level; however, we do not know the
+   exact values x(t)-e.g., if one of the measurement results is 0, this
+   simply means that the actual (unknown) value of x(t) can be. anywhere
+   between 0 and the detection limit (DL). We must, therefore, modify the
+   existing statistical algorithms to process such interval data.
+   Such a modification is also necessary to process data from statistical
+   databases, where, in order to maintain privacy, we only keep interval
+   ranges instead of the actual numeric data (e.g., a salary range instead
+   of the actual salary).
+   Most resulting computational problems are NP-hard-which means, crudely
+   speaking, that in general, no computationally efficient algorithm can
+   solve all particular cases of the corresponding problem. In this paper,
+   we overview practical situations in which computationally efficient
+   algorithms exist: e.g., situations when measurements are very accurate,
+   or when all the measurements are done with one (or few) instruments.
+   As a case study, we consider a practical problem from bioinformatics: to
+   discover the genetic difference between the cancer cells and the healthy
+   cells, we must process the measurements results and find the
+   concentrations c and h of a given gene in cancer and in healthy cells.
+   This is a particular case of a general situation in which, to estimate
+   states or parameters which are not directly accessible by measurements,
+   we must solve a system of equations in which coefficients are only known
+   with interval uncertainty. We show that in general, this problem is
+   NP-hard, and we describe new efficient algorithms for solving this
+   problem in practically important situations. (c) 2006 Elsevier B.V. All
+   rights reserved.
+CT 11th International Symposium on Scientific Computing, Computer
+   Arithmetic, and Validated Numerics
+CY OCT 04-08, 2004
+CL Fukuoka, JAPAN
+SP GAMM-IMACS
+TC 13
+Z9 13
+SN 0377-0427
+UT WOS:000243812400032
+ER
+PT J
+AU Hajagos, Janos G.
+TI Interval Monte Carlo as an alternative to second-order sampling for
+   estimating ecological risk
+SO RELIABLE COMPUTING
+VL 13
+IS 1
+BP 71
+EP 81
+DI 10.1007/s11155-006-9019-0
+PD FEB 2007
+PY 2007
+AB Interval Monte Carlo offers an alternative to second-order approaches
+   for modeling measurement uncertainty in a simulation framework. Using
+   the example of computing quasi-extinction decline risk for an ecological
+   population, an interval Monte Carlo model is built. If the model is not
+   written optimally, the mean and standard deviation of the growth rate
+   repeat, then the bounds on the quasi-extinction risk will be
+   sub-optimal. Depending on your operational definition of what an
+   interval is, the sub-optimal bounds may be the best possible bounds. A
+   comparison between second-order and interval Monte Carlo is made, which
+   reveals that second-order approaches can underestimate the upper bound
+   on the quasi-extinction decline risk to the population when there are a
+   large number of parameters that need to be sampled.
+TC 1
+Z9 1
+SN 1385-3139
+UT WOS:000252216100003
+ER
+PT J
+AU Ferson, Scott
+   Hajagos, Janos G.
+TI Varying correlation coefficients can underestimate uncertainty in
+   probabilistic models
+SO RELIABILITY ENGINEERING & SYSTEM SAFETY
+VL 91
+IS 10-11
+BP 1461
+EP 1467
+DI 10.1016/j.ress.2005.11.043
+PD OCT-NOV 2006
+PY 2006
+AB In accounting for the dependencies among variables in probabilistic
+   (convolution) models, a sensitivity study that varies a correlation
+   between plausible values, even the extremes of +1 and -1, cannot
+   characterize the possible range of results that could be entailed by
+   nonlinear dependencies. Because a functional modeling strategy that
+   seeks to model mechanistically the underlying sources of the
+   dependencies will often be untenable, a phenomenological approach will
+   often be needed to handle dependencies. We summarize recent algorithmic
+   advances that allow the calculation of results under particular
+   bivariate dependence functions, under only partially specified
+   dependence functions, or even without any assumption whatever about
+   dependence. (c) 2005 Elsevier Ltd. All rights reserved.
+CT 4th International Conference on Sensitivity Analysis of Model Output
+   (SAMO 2004)
+CY MAR 08-11, 2004
+CL Santa Fe, NM
+TC 5
+Z9 5
+SN 0951-8320
+UT WOS:000241350400035
+ER
+PT J
+AU Ferson, S
+   Hajagos, JG
+TI Arithmetic with uncertain numbers: rigorous and (often) best possible
+   answers
+SO RELIABILITY ENGINEERING & SYSTEM SAFETY
+VL 85
+IS 1-3
+BP 135
+EP 152
+DI 10.1016/j.ress.2004.03.008
+PD JUL-SEP 2004
+PY 2004
+AB A variety of complex arithmetic problems can be solved using a
+   single-and fairly simple-approach based on probability bounds analysis.
+   The inputs are first expressed as interval bounds on cumulative
+   distribution functions. Each uncertain input variable is then decomposed
+   into a list of pairs of the form (interval, probability). A Cartesian
+   product of these lists, reflecting both the independence among inputs
+   and the mathematical expression that binds them together, creates
+   another list, which is recomposed to form the resulting uncertain number
+   as upper and lower bounds on a cumulative distribution function.
+   Ancillary techniques are also employed, such as condensation, which is
+   necessary to keep the length of the list from growing inordinately in
+   sequential operations, and subinterval reconstitution, which is needed
+   to solve interval arithmetic problems involving repeated parameters.
+   Moment propagation formulas are simultaneously used to bound mean and
+   variance estimates accompanying the bounds on the cumulative
+   distribution function. Generalizations of this approach are also
+   described that allow for dependencies other than independence,
+   completely unknown dependence, and model uncertainty more generally. (C)
+   2004 Elsevier Ltd. All rights reserved.
+CT Workshop on Alternative Representations of Epistemic Uncertainty
+CY AUG 06-07, 2002
+CL Albuquerque, NM
+SP Sandia Natl Labs
+TC 23
+Z9 23
+SN 0951-8320
+UT WOS:000222225400009
+ER
+PT J
+AU Thorsen, DH
+   Mille, KJ
+   Van Tassell, JL
+   Hajagos, JG
+TI Infestation of the parrotfish Sparisoma cretense (Scaridae) by the fish
+   louse Anilocra physodes (Isopoda : Cymothoidae) in the Canary Islands
+SO CYBIUM
+VL 24
+IS 1
+BP 45
+EP 59
+PD 2000
+PY 2000
+AB This study provides evidence that the fish louse, Anilocra physodes has
+   inhabited the Island of Gran Canaria in the Canary Archipelago and that
+   it is the only Island in the Archipelago that is infested. Underwater
+   SCUBA visual surveys were conducted on the island of Gran Canaria during
+   the summers of 1993 and 1998, and on the island of Lanzarote (180 km
+   Northwest of Gran Canaria) during the summer of 1993 to characterize the
+   distribution and infestation rates of A. physodes, found to parasitize
+   the parrotfish Sparisoma cretense. Despite their sympatric distribution
+   throughout the Mediterranean and northeast Atlantic and the broad
+   specificity of A. physodes, this is the first documented occurrence of
+   A. physodes on a fish of the family Scaridae. Of the 451 S. cretense
+   observed on Gran Canaria in 1993, 13.1% were parasitized. On the other
+   hand, no parasites were observed on the 637 parrotfish on Lanzarote, In
+   1998, of the 904 parrotfish observed on Gran Canaria, 11.5% were
+   parasitized. The most likely factors for the absence of parasitic
+   isopods on Lanzarote include lower host density, greater cleaner fish
+   abundance, limited isopod dispersal, and human intervention.
+TC 2
+Z9 3
+SN 0399-0974
+UT WOS:000086964900003
+ER
+EF
