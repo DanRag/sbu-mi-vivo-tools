@@ -6,7 +6,7 @@ __author__ = 'Janos G. Hajagos'
 import numpy as np
 
 class ObjGraphic(object):
-    def __init__(self, group_name = None, object_name = None):
+    def __init__(self, group_name = None, object_name = None, smoothing = False):
         self.vertices = None
         self.faces = None
         self.vector_normals = None
@@ -14,12 +14,13 @@ class ObjGraphic(object):
         self.group_name = group_name
         self.object_name = object_name
         self.material_object = None
+        self.smoothing = smoothing
 
     def associate_material(self,mtl_object):
         self.material_object = mtl_object
 
     def add_vertices(self, list_of_vertices):
-        self.vertices = np.matrix(vertices)
+        self.vertices = np.matrix(list_of_vertices)
 
     def add_normal_vectors(self, list_of_normal_vector):
         self.vector_normals = np.matrix(list_of_normal_vector)
@@ -55,15 +56,14 @@ class Cube(Form):
         self.object_graph = ObjGraphic()
         el = edge_length
 
-        #Front face   Back face   Left face   Right face  Bottom face
-        # 4 3         6  7        4  6        3 7         1 2
-        # 1 2         5  8        1  5        2 8         5 8
+        #Front face   Back face   Left face   Right face  Bottom face   Top Face
+        # 4 3         6  7        4  6        3 7         1 2           6 7
+        # 1 2         5  8        1  5        2 8         5 8           4 3
         self.vertices = [[x,y,z],[x+el,y,z],[x+el,y,z+el],[x,y,z+el],[x,y+el,z],[x+el,y+el,z],[x+el,y+el,z+el],[x,y+el,z+el]]
-        self.faces = [[1,2,3,4],[5,8,7,6],[1,5,6,4],[2,8,7,3],[5,8,2,1]]
+        self.faces = [[1,2,3,4],[5,8,7,6],[1,5,6,4],[2,8,7,3],[5,8,2,1],[4,3,7,6]]
 
         self.object_graph.add_vertices(self.vertices)
         self.object_graph.add_face(self.faces)
-
 
 class MtlMaterial(object):
     def __init__(self,name):
@@ -82,7 +82,7 @@ class MtlMaterial(object):
         self.map_alpha_texture = None #map_d  filename.tga      # the alpha texture map
         self.map_bump = None #map_bump filename.tga
 
-    def set_illumination(self,illumination):
+    def set_illumination(self, illumination):
         """
         0. Color on and Ambient off
         1. Color on and Ambient on
@@ -119,10 +119,31 @@ class MtlMaterial(object):
 #g [group name]
 
 
+class WaveFrontFileWriter(object):
+    def header(self):
+        return ""
+    def generate_file(self,file_object):
+        pass
 
-class ObjGraphicFileWriter(object):
+
+class ObjGraphicFileWriter(WaveFrontFileWriter):
+    """Takes multiple objects and writes them to a single OBJ file taking into account
+    bookkeeping for vertices, triangulation if requested, and material file association
+    """
     def __init__(self,list_of_objects):
-        pass
+        self.list_of_objects = list_of_objects
+
     def generate_file(self, file_object):
-        pass
+        f = file_object
+
+    def header(self):
+        return ""
+
+class MtlFileWriter(WaveFrontFileWriter):
+    """Takes multiple MtlFile objects and creates a single MTL File"""
+
+    def __init__(self,list_of_mtls):
+        self.list_of_mtls = list_of_mtls
+    def generate_file(self,file_object):
+        f = file_object
 
