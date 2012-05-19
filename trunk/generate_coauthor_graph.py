@@ -21,15 +21,15 @@ def main(file_name,in_network_restriction=1):
     graph_obj = ExtractGraphFromSimpleTripleStore(ts)
     graph_obj.register_label()
 
-    base_patterns = [("a1","p1","c1"),("a1","t","f"),("c1","p2","ar1"),("c2","p2","ar1"),("a2","p1","c2")]
+    base_patterns = [("a1","p1","c1"),("c1","p2","ar1"),("c2","p2","ar1"),("a2","p1","c2")]
     base_restrictions = [("p1","in",["<http://vivoweb.org/ontology/core#authorInAuthorship>"]),
         ("p2", "in", ["<http://vivoweb.org/ontology/core#linkedInformationResource>"]),
         ("c1","!=","c2")]
 
     if in_network_restriction:
-        membership_pattern = ("a2","t","f")
+        membership_pattern = [("a2","t","f"), ("a1","t","f")]
         membership_restriction = ("t","in", ["<http://vivoweb.org/ontology/core#hasMemberRole>"])
-        base_patterns.append(membership_pattern)
+        base_patterns += membership_pattern
         base_restrictions.append(membership_restriction)
 
     graph_obj.add_pattern_for_links(base_patterns,base_restrictions,["a1","a2"],"coauthors")
