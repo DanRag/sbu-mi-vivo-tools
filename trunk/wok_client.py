@@ -12,7 +12,7 @@ import logging
 import pprint
 import sys
 import time
-
+from wok_util import author_process_abbreviated as author_process
 
 logging.basicConfig(level=logging.INFO)
 
@@ -68,7 +68,7 @@ class WokResults(object):
             try:
                 author_list_raw =  self.authors(search_result.authors)
                 for article_author in author_list_raw:
-                    result_dict["authors"].append(self.author(article_author))
+                    result_dict["authors"].append(author_process(article_author))
             except AttributeError:
                 authors = None
 
@@ -91,36 +91,13 @@ class WokResults(object):
             except AttributeError:
                 raise
 
+            pprint.pprint(result_dict)
             results.append(result_dict)
-            pprint.pprint(results)
+            #pprint.pprint(results)
 
     def authors(self,authors_xml):
         author_list = authors_xml[0].values
         return author_list
-
-    def author(self,author):
-        author_dict = {"author_original" : author}
-        author_split = [part.strip() for part in author.split(",")]
-        last_name = author_split[0]
-        if len(author_split) == 2:
-            initials = author_split[1]
-            if len(initials) == 2:
-                first_name_initial = initials[0]
-                middle_name_initial = initials[1]
-            else:
-                first_name_initial = initials[0]
-                middle_name_initial = ""
-        else:
-            first_name_initial = ""
-            middle_name_initial = ""
-
-        author_dict["last_name"] = last_name
-        author_dict["first_name_initial"] = first_name_initial
-        author_dict["middle_name_initial"] = middle_name_initial
-        full_name = first_name_initial + middle_name_initial + " " + last_name
-        author_dict["full_name"] = full_name.strip()
-
-        return author_dict
 
     def source(self, source_xml):
         source_dict = {}
