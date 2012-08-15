@@ -69,7 +69,7 @@ def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://pur
             i+=1
 
     fo = open(cuis_ntriples_file_name,"w")
-    fo.write(output_triple_store.export_to_ntriples_string())
+    output_triple_store.export_to_ntriples_file(fo)
     fo.close()
     f.close()
 
