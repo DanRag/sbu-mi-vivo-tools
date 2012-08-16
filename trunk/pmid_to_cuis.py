@@ -57,7 +57,7 @@ def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://pur
             for cui in cui_results:
                 cui_uri = str(cui[u'cui'])
                 cui_label = str(cui[u'cuilabel'])
-                if cui_uri[0:5] == "https":
+                if cui_uri[0:5] == "http:":
                     pmid_dc_triple = pmid_triple[0] + " <" + dc_subject + "> <" + cui_uri + "> .\n"
                     if cuis_list.has_key(cui_uri):
                         cui_label_triple = ""
