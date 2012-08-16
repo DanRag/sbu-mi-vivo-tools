@@ -57,15 +57,16 @@ def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://pur
             for cui in cui_results:
                 cui_uri = str(cui[u'cui'])
                 cui_label = str(cui[u'cuilabel'])
-                pmid_dc_triple = pmid_triple[0] + " <" + dc_subject + "> <" + cui_uri + "> .\n"
-                if cuis_list.has_key(cui_uri):
-                    cui_label_triple = ""
-                    cuis_list[cui_uri] += 1
-                else:
-                    cui_label_triple = '<%s> <http://www.w3.org/2000/01/rdf-schema#label> "%s" .\n' % (cui_uri, cui_label)
-                    cuis_list[cui_uri] = 1
-                
-                output_triple_store.load_ntriples([pmid_dc_triple + cui_label_triple])
+                if cui_uri[0:5] == "https":
+                    pmid_dc_triple = pmid_triple[0] + " <" + dc_subject + "> <" + cui_uri + "> .\n"
+                    if cuis_list.has_key(cui_uri):
+                        cui_label_triple = ""
+                        cuis_list[cui_uri] += 1
+                    else:
+                        cui_label_triple = '<%s> <http://www.w3.org/2000/01/rdf-schema#label> "%s" .\n' % (cui_uri, cui_label)
+                        cuis_list[cui_uri] = 1
+
+                    output_triple_store.load_ntriples([pmid_dc_triple + cui_label_triple])
             i+=1
 
     fo = open(cuis_ntriples_file_name,"w")
