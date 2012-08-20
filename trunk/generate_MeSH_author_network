@@ -40,6 +40,7 @@ def main(vivo_abox_dump, vivo_aligned_mesh):
     graph_obj.translate_into_graphml_file(fo)
     fo.close()
 
-if __name__ == __main__:
+if __name__ == '__main__':
     vivo_abox_dump = sys.argv[1]
     vivo_aligned_mesh = sys.argv[2]
+    main(vivo_abox_dump,vivo_aligned_mesh)
