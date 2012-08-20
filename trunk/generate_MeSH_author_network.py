@@ -1,3 +1,4 @@
+"""Connect researchers of a site to their MeSH aligned UMLS CUIs"""
 
 from pyTripleSimple import SimpleTripleStore
 from pyTripleSimple import ExtractGraphFromSimpleTripleStore
