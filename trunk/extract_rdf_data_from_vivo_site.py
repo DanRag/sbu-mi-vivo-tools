@@ -3,10 +3,8 @@ import sys
 import urllib
 
 def main(site, username, password, tbox="TBOX",abox="ABOX",file_name = None):
-    """
-    Script logs into a VIVO 1,2 website and extracts ABOX and TBOX RDF data. No need to go directly
-    to the underlying Jena storage but we access the data.
-    """
+    """Script logs into a VIVO 1.5 website and extracts ABOX and TBOX RDF data. No need to go directly
+    to the underlying Jena storage but as we dump the entire data model."""
 
     headers = {'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 'Accept-Charset'	: 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
@@ -21,21 +19,20 @@ def main(site, username, password, tbox="TBOX",abox="ABOX",file_name = None):
     login_data = 'loginName=%s&loginPassword=%s&loginForm=Log+in' % (urllib.quote(username), urllib.quote(password))
     h = httplib2.Http()
     resp,cont = h.request(site + "/authenticate",method="POST",headers=headers, body=login_data)
-  
     headers = {}
     headers["Cookie"] = resp["set-cookie"]
-
     if file_name is not None:
         f = open(file_name,"w")
-
+    else:
+        f=None
     if tbox:
-        resp,cont = h.request(site + '/export?subgraph=tbox&assertedOrInferred=asserted&format=N-TRIPLES&submit=Export',headers=headers)
+        resp,cont = h.request(site + '/export?subgraph=tbox&assertedOrInferred=asserted&format=N-TRIPLE&submit=Export',headers=headers)
         if file_name is not None:
             f.write(cont)
         else:
             print(cont)
     if abox:
-        resp,cont = h.request(site + '/export?subgraph=abox&assertedOrInferred=asserted&format=N-TRIPLES&submit=Export',headers=headers)
+        resp,cont = h.request(site + '/export?subgraph=abox&assertedOrInferred=asserted&format=N-TRIPLE&submit=Export',headers=headers)
         if file_name is not None:
             f.write(cont)
         else:
@@ -70,6 +67,6 @@ if __name__ == "__main__":
         print("""Usage:
 python extract_rdf_data_from_vivo_site.py 'http://reach.suny.edu' username password [TBOX] [ABOX]
 
-Logs into a remote VIVO 1.2 site and downloads ABOX and TBOX RDF serialized as ntriples to the
+Logs into a remote VIVO 1.5 site and downloads ABOX and TBOX RDF serialized as ntriples to the
 standard output.
 """)
