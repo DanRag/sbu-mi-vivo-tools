@@ -18,7 +18,7 @@ def main(site, username, password, tbox="TBOX",abox="ABOX",file_name = None):
 
     login_data = 'loginName=%s&loginPassword=%s&loginForm=Log+in' % (urllib.quote(username), urllib.quote(password))
     h = httplib2.Http()
-    resp,cont = h.request(site + "/authenticate",method="POST",headers=headers, body=login_data)
+    resp,cont = h.request(site + "/authenticate",method="POST", headers=headers, body=login_data)
     headers = {}
     headers["Cookie"] = resp["set-cookie"]
     if file_name is not None:
