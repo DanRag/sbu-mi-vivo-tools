@@ -15,14 +15,13 @@ import os
 import time
 import glob
 
-
 import extract_rdf_data_from_vivo_site
 import pmid_to_cuis
 import umls_alignment
 import FreeTextTriples
 
 
-def main(configuration_json,step_to_start_at = 0):
+def main(configuration_json, step_to_start_at=0):
 
     f = open(configuration_json,"r")
     configuration = json.load(f)
@@ -30,7 +29,7 @@ def main(configuration_json,step_to_start_at = 0):
     i = 0
     for vivo_site in configuration["vivo-sites"]:
         base_file_name = vivo_site["name"]
-        current_date_odbc = time.strftime("%Y-%m-%d",time.localtime())
+        current_date_odbc = time.strftime("%Y-%m-%d", time.localtime())
         abox_file_name = base_file_name + "_abox_" + current_date_odbc + ".nt"
         tbox_file_name = base_file_name + "_tbox_" + current_date_odbc + ".nt"
         vivo_site["abox_file_name"] = abox_file_name
@@ -73,7 +72,10 @@ def load_onto_virtuoso():
 if __name__ == "__main__":
     if len(sys.argv) == 1:
         print """Usage:
-python build_vivo_analytic_site.py configuration.json
+python build_vivo_analytic_site.py configuration.json [2]
 """
     else:
-        main(sys.argv[1])
+        if len(sys.argv) == 2:
+            main(sys.argv[1])
+        elif len(sys.argv) == 3:
+            main(sys.argv[1], int(sys.argv[2]))

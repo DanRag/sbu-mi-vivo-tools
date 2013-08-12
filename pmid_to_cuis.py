@@ -9,6 +9,7 @@ import httplib
 import json
 import pprint
 
+
 def pubmed_to_cuis(pmid):
     
     base_server = "link.informatics.stonybrook.edu" 
@@ -19,17 +20,17 @@ def pubmed_to_cuis(pmid):
     
     resp = conn.getresponse()
     result_set = []
-    if str(resp.status)[0] =="2":
+    if str(resp.status)[0] == "2":
         response = resp.read()
 
-        cuilist = json.loads(response)
-        return cuilist
+        cui_list = json.loads(response)
+        return cui_list
     else:
         print("Call to server timed out")
         return []
             
 
-def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://purl.org/ontology/bibo/pmid"):
+def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri="http://purl.org/ontology/bibo/pmid"):
     f = open(ntriples_file_name,"r")
     ts = pyTripleSimple.SimpleTripleStore()
     results_ts = pyTripleSimple.SimpleTripleStore()
@@ -40,12 +41,13 @@ def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://pur
     end_time = time.clock()
     print("Finished loading ntriples file in %s seconds" % (end_time - start_time,))
 
-    output_triple_store =  pyTripleSimple.SimpleTripleStore()
+    output_triple_store = pyTripleSimple.SimpleTripleStore()
     dc_subject = "http://purl.org/dc/elements/1.1/subject"
     pmid_to_cui_uris = ts.predicates(predicate_uri)
     print("PubMed articles found %s" % len(pmid_to_cui_uris))
     zero_counter = 0
     cuis_list = {}
+
     if pmid_to_cui_uris:
         i = 1
         for pmid_triple in pmid_to_cui_uris:
@@ -53,7 +55,7 @@ def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://pur
             cui_results = pubmed_to_cuis(pmid)
             if len(cui_results) == 0:
                 zero_counter += 1
-            print("Article (pmid:%s) %s of %s found %s cuis" % (pmid,i,len(pmid_to_cui_uris),len(cui_results)))
+            print("Article (pmid:%s) %s of %s found %s cuis" % (pmid, i, len(pmid_to_cui_uris), len(cui_results)))
             for cui in cui_results:
                 cui_uri = str(cui[u'cui'])
                 cui_label = str(cui[u'cuilabel'])
@@ -79,7 +81,6 @@ def main(ntriples_file_name,cuis_ntriples_file_name, predicate_uri = "http://pur
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        main("reach_abox_2011-08-22.nt","pubmed2cuis.nt")
+        main("reach_abox_2011-08-22.nt", "pubmed2cuis.nt")
     else:
         main(sys.argv[1],sys.argv[2])
-    
