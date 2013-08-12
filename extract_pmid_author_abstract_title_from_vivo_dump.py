@@ -103,7 +103,7 @@ def main(vivo_triple_file_name, regenerate_json_from_vivo=False, regenerate_pubm
 
         pmid_author_dict_json = "pmid_author_dict.json"
         with open(pmid_author_dict_json,"w") as fw:
-            json.dump(pmid_author_dict_json, fw)
+            json.dump(pmid_author_dict, fw)
 
         pmid_details_column_order = ["title","abstract","has_abstract", "pub_date"]
 
@@ -127,7 +127,13 @@ def main(vivo_triple_file_name, regenerate_json_from_vivo=False, regenerate_pubm
                 try:
                     csv_writer.writerow(row_to_write)
                 except UnicodeEncodeError:
-                   print(row_to_write)
+
+                    if row_to_write[-3] is not None:
+                        row_to_write[-3] = row_to_write[-3].encode('ascii', 'ignore') #UGLY Fix
+                    if row_to_write[-4] is not None:
+                        row_to_write[-4] = row_to_write[-4].encode('ascii', 'ignore') #UGLY Fix
+                    print(row_to_write)
+                    csv_writer.writerow(row_to_write)
 
 
 def generate_json_extracted_from_vivo(vivo_triple_file_name, custom_vivo_member_type="<http://reach.suny.edu/ontology/core#SUNY_REACH_Investigator>"):
