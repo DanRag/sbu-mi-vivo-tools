@@ -32,8 +32,8 @@ def main(ntriple_source_file, sab_class, child_of_predicate, file_name_prefix=""
     graph_obj.register_node_predicate("<http://link.informatics.stonybrook.edu/umls/hasSAB>", "SAB", url_get_tail)
     graph_obj.register_node_predicate("<http://link.informatics.stonybrook.edu/umls/hasTermType>", "TTY", url_get_tail)
 
-    base_patterns = [("aui1","sab_predicate","sab"), ("aui1","childOf", "aui2"), ("aui2","sab_predicate","sab")]
-    base_restrictions = [("sab", "in", sab_class), ("childOf", "in", [child_of_predicate])]
+    base_patterns = [("aui1","sab_predicate", "sab1"), ("aui1","childOf", "aui2"), ("aui2", "sab_predicate", "sab2")]
+    base_restrictions = [("sab1", "in", sab_class), ("sab2", "in", sab_class), ("childOf", "in", [child_of_predicate])]
 
     print("Writing results to a file")
 
