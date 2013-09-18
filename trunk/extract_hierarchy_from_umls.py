@@ -110,6 +110,7 @@ if __name__ == '__main__':
 #    parent_term = sys.argv[3]
 #    preferred_term_filter =  sys.argv[4]
 
-    main("E:/data/umls/umls_full_isf_micro.nt","<http://link.informatics.stonybrook.edu/umls/SAB/ICD9CM>","<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="icd9cm_")
+    #main("E:/data/umls/umls_full_isf_micro.nt","<http://link.informatics.stonybrook.edu/umls/SAB/ICD9CM>","<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="icd9cm_")
     #main("C:/users/janos/data/umls/umls_full_isf_micro.nt","<http://link.informatics.stonybrook.edu/umls/SAB/NCI>","<http://link.informatics.stonybrook.edu/umls/RELA#isa>",file_name_prefix="nci_")
     #main("/home/janos/rdf/umls_full_isf.nt","<http://link.informatics.stonybrook.edu/umls/SAB/MSH>","<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="msh_")
+    main("/home/janos/rdf/umls_full_isf.nt",["<http://link.informatics.stonybrook.edu/umls/SAB/CPT>","<http://link.informatics.stonybrook.edu/umls/SAB/MTHCH>"],"<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="cpt_")
