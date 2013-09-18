@@ -9,6 +9,7 @@ url_get_tail = lambda x: x[x.rfind("/")+1:]
 
 
 def search_patterns(sab, child_of_predicate):
+
     if len(sab) == 1:
         base_patterns = [("aui1", "sab_predicate", "sab"), ("aui1", "childOf", "aui2"), ("aui2", "sab_predicate", "sab")]
         base_restrictions = [("sab", "in", sab), ("childOf", "in", [child_of_predicate])]
@@ -34,7 +35,6 @@ def create_graph_obj(ts):
     graph_obj.register_node_predicate("<http://link.informatics.stonybrook.edu/umls/hasSAB>", "SAB", url_get_tail)
     graph_obj.register_node_predicate("<http://link.informatics.stonybrook.edu/umls/hasTermType>", "TTY", url_get_tail)
 
-
     return graph_obj
 
 
@@ -47,9 +47,9 @@ def main(ntriple_source_file, sab_class, child_of_predicate, file_name_prefix=""
 
     if len(sab_class) == 1:
         base_patterns, base_restrictions = search_patterns(sab_class, child_of_predicate)
-    elif len(sab_class)  == 2:
-        base_patterns11, base_restrictions11 = search_patterns(sab_class[0], child_of_predicate)
-        base_patterns22, base_restrictions22 = search_patterns(sab_class[1], child_of_predicate)
+    elif len(sab_class) == 2:
+        base_patterns11, base_restrictions11 = search_patterns([sab_class[0]], child_of_predicate)
+        base_patterns22, base_restrictions22 = search_patterns([sab_class[1]], child_of_predicate)
         base_patterns12, base_restrictions12 = search_patterns(sab_class, child_of_predicate)
     else:
         raise RuntimeError, "Only one or two SABs supported"
@@ -114,3 +114,4 @@ if __name__ == '__main__':
     #main("C:/users/janos/data/umls/umls_full_isf_micro.nt","<http://link.informatics.stonybrook.edu/umls/SAB/NCI>","<http://link.informatics.stonybrook.edu/umls/RELA#isa>",file_name_prefix="nci_")
     #main("/home/janos/rdf/umls_full_isf.nt","<http://link.informatics.stonybrook.edu/umls/SAB/MSH>","<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="msh_")
     main("/home/janos/rdf/umls_full_isf.nt",["<http://link.informatics.stonybrook.edu/umls/SAB/CPT>","<http://link.informatics.stonybrook.edu/umls/SAB/MTHCH>"],"<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="cpt_")
+    #main("E:/data/umls/umls_full_isf_micro_icd9.nt",["<http://link.informatics.stonybrook.edu/umls/SAB/CPT>","<http://link.informatics.stonybrook.edu/umls/SAB/MTHCH>"],"<http://link.informatics.stonybrook.edu/umls/REL#CHD>",file_name_prefix="cpt_")
