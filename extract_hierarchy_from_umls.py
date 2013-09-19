@@ -76,30 +76,15 @@ def main(ntriple_source_file, sab_class, child_of_predicate, file_name_prefix=""
 
     elif len(sab_class) == 2:
 
-        graphML_base_file_name11 = file_name_prefix + ntriple_source_base_file_name + "11" + ".network.hierarchy.graphml"
-        graphML_file_name11 = os.path.join(directory, graphML_base_file_name11)
-
-        graphML_base_file_name22 = file_name_prefix + ntriple_source_base_file_name + "22" + ".network.hierarchy.graphml"
-        graphML_file_name22 = os.path.join(directory, graphML_base_file_name22)
-
-        graphML_base_file_name12 = file_name_prefix + ntriple_source_base_file_name + "12" + ".network.hierarchy.graphml"
-        graphML_file_name12 = os.path.join(directory, graphML_base_file_name12)
+        graphML_base_file_name = file_name_prefix + ntriple_source_base_file_name + "11" + ".network.hierarchy.graphml"
+        graphML_file_name = os.path.join(directory, graphML_base_file_name)
 
         print("Outputting Graph11")
-        with open(graphML_file_name11, "w") as fo:
+        with open(graphML_file_name, "w") as fo:
             graph_obj = create_graph_obj(ts)
+
             graph_obj.add_pattern_for_links(base_patterns11, base_restrictions11, ["aui1", "aui2"], "childOf")
-            graph_obj.translate_into_graphml_file(fo)
-
-        print("Outputting Graph22")
-        with open(graphML_file_name22, "w") as fo:
-            graph_obj = create_graph_obj(ts)
             graph_obj.add_pattern_for_links(base_patterns22, base_restrictions22, ["aui1", "aui2"], "childOf")
-            graph_obj.translate_into_graphml_file(fo)
-
-        print("Outputting Graph12")
-        with open(graphML_file_name12, "w") as fo:
-            graph_obj = create_graph_obj(ts)
             graph_obj.add_pattern_for_links(base_patterns12, base_restrictions12, ["aui1", "aui2"], "childOf")
             graph_obj.translate_into_graphml_file(fo)
 
