@@ -1,0 +1,1 @@
+Scripts for working with VIVO (www.vivoweb.org) installations and VIVO RDF data. Scripts depend on the installation of the [py-triple-simple](http://code.google.com/p/py-triple-simple/) library.
